@@ -45,42 +45,42 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return (NULL);
 }
-char	*ft_strjoin(char *s1, char *s2)
+
+char	*ft_strjoin_gnl(char **rem, char *buf)
 {
 	char	*uns;
-	int		len;
 	int		i;
 	int		j;
 
-	if (s1 == NULL || s2 == NULL)
+	if (*rem == NULL || rem == NULL)
 		return (NULL);
 	i = 0;
 	j = 0;
-	len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	uns = NULL;
-	uns = (char *)malloc(len);
+	uns = (char *)malloc(ft_strlen(*rem) + ft_strlen(buf) + 1);
 	if (uns == NULL)
 		return (NULL);
-	while (s1[i])
+	while ((*rem)[i])
 	{
-		uns[i] = s1[i];
+		uns[i] = (*rem)[i];
 		i++;
 	}
-	while (s2[j])
+	while (buf[j])
 	{
-		uns[i++] = s2[j++];
+		uns[i++] = buf[j++];
 	}
 	uns[i] = '\0';
-	free (s1);
+	free (*rem);
 	return (uns);
 }
-
 
 char	*ft_strdup(const char *s1)
 {
 	char	*scp;
 	int		i;
 
+	if (s1 == NULL)
+		return (NULL);
 	scp = NULL;
 	scp = (char *)malloc(ft_strlen(s1) + 1);
 	if (scp == NULL)
@@ -94,22 +94,12 @@ char	*ft_strdup(const char *s1)
 	scp[i] = '\0';
 	return (scp);
 }
-char	*ft_strdup_for_am(char *am, char *s)
+
+char	*ft_strdup_for_am(char **am, char *s)
 {
 	char	*scp;
-	int		i;
 
-	scp = NULL;
-	scp = (char *)malloc(ft_strlen(s) + 1);
-	if (scp == NULL)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		scp[i] = s[i];
-		i++;
-	}
-	scp[i] = '\0';
-	free(am);
+	scp = ft_strdup(s);
+	free (*am);
 	return (scp);
 }
