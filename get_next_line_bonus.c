@@ -73,6 +73,8 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*rem[2048];
 
+	if (fd < 0)
+		return (NULL);
 	if (rem[fd] == NULL)
 		rem[fd] = ft_strdup("\0");
 	if (ft_strchr(rem[fd], '\n') == NULL)
