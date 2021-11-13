@@ -24,10 +24,9 @@ static int	read_file(int fd, char **rem)
 	char	buf[BUFFER_SIZE + 1];
 	int		rd;
 
-	rd = 0;
-	while ((rd = read(fd, buf, BUFFER_SIZE)) > 0)
+	rd = read(fd, buf, BUFFER_SIZE);
+	while (rd > 0)
 	{
-		//rd = read(fd, buf, BUFFER_SIZE;
 		if (rd <= 0 || fd < 0)
 		{
 			free_and_nullify(rem);
@@ -37,6 +36,7 @@ static int	read_file(int fd, char **rem)
 		*rem = ft_strjoin_gnl(rem, buf);
 		if (ft_strchr(*rem, '\n') != NULL)
 			break ;
+		rd = read(fd, buf, BUFFER_SIZE);
 	}
 	return (1);
 }
