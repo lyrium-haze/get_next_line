@@ -94,3 +94,12 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
+#include <fcntl.h>
+int main()
+{
+	int fd = open("text2.txt", O_RDONLY);
+	char *l = get_next_line(fd);
+	printf("%s ", l);
+	free(l);
+	close(fd);
+}
